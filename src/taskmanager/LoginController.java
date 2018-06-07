@@ -68,6 +68,7 @@ public class LoginController implements Initializable {
                 Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml");
             } else {
                 //invalid account
+
             }
 
 
