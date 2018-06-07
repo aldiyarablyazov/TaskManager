@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taskmanager.LoginController">
+   <children>
+      <JFXTabPane fx:id="loginTabPane" prefHeight="400.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab fx:id="loginTab" text="Login">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1F2022;">
+                     <children>
+                        <AnchorPane layoutX="56.0" layoutY="-22.0" minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="322.0" style="-fx-background-color: #303135;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-7.0" layoutY="26.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="336.0" text="WELCOME TO TASKMANAGER" textAlignment="CENTER" textFill="WHITE" AnchorPane.topAnchor="26.0">
+                                 <font>
+                                    <Font name="Montserrat Thin" size="18.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="61.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../logo.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXButton buttonType="RAISED" layoutX="100.0" layoutY="303.0" onAction="#goToRegisterButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #e74c3c;" text="REGISTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="16.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="321.0" prefHeight="370.0" prefWidth="369.0" style="-fx-background-radius: 5;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXPasswordField fx:id="passwordField" focusColor="#3498db" labelFloat="true" layoutX="24.0" layoutY="206.0" prefHeight="27.0" prefWidth="216.0" promptText="Password" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                 <font>
+                                    <Font name="Montserrat Light" size="13.0" />
+                                 </font>
+                              </JFXPasswordField>
+                              <JFXTextField fx:id="usernameField" focusColor="#3498db" labelFloat="true" layoutX="22.0" layoutY="151.0" prefHeight="27.0" prefWidth="350.0" promptText="Username" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                 <font>
+                                    <Font name="Montserrat Light" size="13.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXTextField>
+                              <JFXRadioButton fx:id="studentRadio1" layoutX="71.0" layoutY="109.0" style="-jfx-selected-color: #3498db;" text="Student" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="loginToggle" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="teacherRadio1" layoutX="203.0" layoutY="109.0" style="-jfx-selected-color: #3498db;" text="Teacher" textFill="WHITE" toggleGroup="$loginToggle" />
+                              <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="70.0" layoutY="270.0" onAction="#loginButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="LOGIN" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="16.0" />
+                                 </font>
+                              </JFXButton>
+                              <Label layoutX="127.0" layoutY="32.0" text="LOG IN" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                                 <font>
+                                    <Font name="Montserrat SemiBold" size="29.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="registerTab" text="Register">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #303135;">
+                     <children>
+                        <ImageView fitHeight="368.0" fitWidth="700.0" layoutX="26.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.7838134765625" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../RegisterBackground.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane layoutX="200.0" layoutY="71.0" prefHeight="265.0" prefWidth="300.0" style="-fx-background-color: #1F2022; -fx-background-radius: 5;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+                           <children>
+                              <AnchorPane layoutX="30.0" layoutY="55.0" prefHeight="114.0" prefWidth="262.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                 <children>
+                                    <JFXPasswordField fx:id="repeatPasswordField" focusColor="#3498db" labelFloat="true" layoutX="-3.0" layoutY="71.0" prefHeight="27.0" prefWidth="262.0" promptText="Repeat Password" style="-fx-text-inner-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <font>
+                                          <Font name="Montserrat Light" size="13.0" />
+                                       </font>
+                                    </JFXPasswordField>
+                                    <JFXTextField fx:id="usernameField1" focusColor="#3498db" labelFloat="true" prefHeight="27.0" prefWidth="214.0" promptText="New Username" style="-fx-text-inner-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="Montserrat Light" size="13.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </JFXTextField>
+                                    <JFXPasswordField fx:id="passwordField1" focusColor="#3498db" labelFloat="true" layoutX="-3.0" layoutY="43.0" prefHeight="27.0" prefWidth="262.0" promptText="Password" style="-fx-text-inner-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <font>
+                                          <Font name="Montserrat Light" size="13.0" />
+                                       </font>
+                                    </JFXPasswordField>
+                                 </children>
+                              </AnchorPane>
+                              <JFXButton fx:id="registerButton" buttonType="RAISED" layoutX="100.0" layoutY="194.0" onAction="#registerButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="REGISTER" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                                 <font>
+                                    <Font name="Montserrat SemiBold" size="16.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXRadioButton fx:id="studentRadio2" layoutX="47.0" layoutY="20.0" style="-jfx-selected-color: #3498db;" text="Student" textFill="WHITE" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="20.0">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="registerToggle" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="teacherRadio2" layoutX="169.0" layoutY="20.0" style="-jfx-selected-color: #3498db;" text="Teacher" textFill="WHITE" toggleGroup="$registerToggle" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="20.0" />
+                              <JFXButton layoutX="28.0" layoutY="234.0" mnemonicParsing="false" onAction="#goToLoginButtonPressed" prefHeight="15.0" prefWidth="241.0" ripplerFill="#1f2022" text="Already have an account?" textFill="#3498db">
+                                 <font>
+                                    <Font name="Montserrat ExtraLight" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="15.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="336.0" text="CREATE NEW ACCOUNT" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font name="Montserrat ExtraLight" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>
