@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
 
             if (AccountController.isValidAccount()) {
 
-                Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1000, 1000);
+                Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1050, 600);
             } else {
                 System.out.println("Invalid Account");
             }
