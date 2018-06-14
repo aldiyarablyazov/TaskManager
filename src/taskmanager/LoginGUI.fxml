@@ -122,7 +122,7 @@
                                  </toggleGroup>
                               </JFXRadioButton>
                               <JFXRadioButton fx:id="teacherRadio2" layoutX="169.0" layoutY="20.0" style="-jfx-selected-color: #3498db;" text="Teacher" textFill="WHITE" toggleGroup="$registerToggle" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="20.0" />
-                              <JFXButton layoutX="28.0" layoutY="234.0" mnemonicParsing="false" onAction="#goToLoginButtonPressed" prefHeight="15.0" prefWidth="241.0" ripplerFill="#1f2022" text="Already have an account?" textFill="#3498db">
+                              <JFXButton layoutX="28.0" layoutY="234.0" mnemonicParsing="false" onAction="#goToLoginButtonPressed" prefHeight="15.0" prefWidth="241.0" ripplerFill="#1f2022" text="Already have an account?" textFill="#3498db" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                                  <font>
                                     <Font name="Montserrat ExtraLight" size="13.0" />
                                  </font>

@@ -17,23 +17,17 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("LoginGUI.fxml"));
-
         Scene loginScene = new Scene(root);
 
         loginScene.getStylesheets().add("CustomStyle.css");
         primaryStage.setTitle("Task Manager");
         primaryStage.setScene(loginScene);
-
-        primaryStage.setMaxHeight(500);
-        primaryStage.setMaxWidth(800);
-        primaryStage.setMinHeight(400);
-        primaryStage.setMinWidth(700);
-
-
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
+
         try {
             URL iconURL = Main.class.getResource("/logo.png");
             Image image = new ImageIcon(iconURL).getImage();

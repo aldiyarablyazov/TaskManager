@@ -5,9 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -24,23 +25,19 @@ public class LoginController implements Initializable {
     @FXML private Tab registerTab;
     @FXML private JFXButton loginButton;
     @FXML private Tab loginTab;
-
-    private ArrayList usernames = new ArrayList();
-    private ArrayList passwords = new ArrayList();
-    private ArrayList professions = new ArrayList();
-    private ArrayList userIDs = new ArrayList();
+    @FXML public AnchorPane mainAnchorPane;
 
     @FXML
-    private void loginButtonPressed(ActionEvent event) {
+    private void loginButtonPressed(ActionEvent event) throws IOException {
         System.out.println("\n");
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         // Radio Button Error Handling
         String selected = "";
-        if (studentRadio1.isSelected() == true) {
+        if (studentRadio1.isSelected()) {
             selected = "Student";
-        } else if (teacherRadio1.isSelected() == true) {
+        } else if (teacherRadio1.isSelected()) {
             selected = "Teacher";
         } else {
             System.out.println("You have to select your profession");
@@ -65,15 +62,13 @@ public class LoginController implements Initializable {
 
 
             if (AccountController.isValidAccount()) {
-                Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml");
-            } else {
-                //invalid account
 
+                Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1000, 1000);
+            } else {
+                System.out.println("Invalid Account");
             }
 
-
         }
-
     }
 
     @FXML
@@ -84,9 +79,9 @@ public class LoginController implements Initializable {
         String repeatPass = repeatPasswordField.getText();
 
         String selectedProfession = "";
-        if (studentRadio2.isSelected() == true) {
+        if (studentRadio2.isSelected()) {
             selectedProfession = "Student";
-        } else if (teacherRadio2.isSelected() == true) {
+        } else if (teacherRadio2.isSelected()) {
             selectedProfession = "Teacher";
         }
 
@@ -109,6 +104,10 @@ public class LoginController implements Initializable {
             repeatPasswordField.setStyle("-fx-prompt-text-fill: red");
 
         }  else {
+
+            usernameField.setStyle("-fx-text-inner-color: white");
+            passwordField.setStyle("-fx-text-inner-color: white");
+
             System.out.println("\n");
             System.out.println("Position: " + selectedProfession);
             System.out.println("Username: " + username1);

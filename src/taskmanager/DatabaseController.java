@@ -65,7 +65,6 @@ public class DatabaseController implements Initializable {
                             userIDs.add(value);
                             break;
                     }
-
                 }
 
                 System.out.println();
