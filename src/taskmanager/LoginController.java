@@ -5,14 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    @FXML private JFXTextField usernameField;
+    @FXML public  JFXTextField usernameField;
     @FXML private JFXPasswordField passwordField;
     @FXML private JFXTextField usernameField1;
     @FXML private JFXPasswordField passwordField1;
@@ -25,7 +24,6 @@ public class LoginController implements Initializable {
     @FXML private Tab registerTab;
     @FXML private JFXButton loginButton;
     @FXML private Tab loginTab;
-    @FXML public AnchorPane mainAnchorPane;
 
     @FXML
     private void loginButtonPressed(ActionEvent event) throws IOException {
@@ -34,11 +32,12 @@ public class LoginController implements Initializable {
         String password = passwordField.getText();
 
         // Radio Button Error Handling
-        String selected = "";
+        int isTeacher = 0;
+
         if (studentRadio1.isSelected()) {
-            selected = "Student";
+            isTeacher = 0;
         } else if (teacherRadio1.isSelected()) {
-            selected = "Teacher";
+            isTeacher = 1;
         } else {
             System.out.println("You have to select your profession");
         }
@@ -55,19 +54,17 @@ public class LoginController implements Initializable {
             usernameField.setStyle("-fx-text-inner-color: white");
             passwordField.setStyle("-fx-text-inner-color: white");
 
-            System.out.println("Position: " + selected);
+            System.out.println("Position: " + isTeacher);
             System.out.println("Username: " + username);
             System.out.println("Password: " + password);
 
 
-
-            if (AccountController.isValidAccount()) {
-
+            AccountController accountController = new AccountController();
+            if (accountController.isValidAccount(usernameField.getText(), passwordField.getText(), isTeacher)) {
                 Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1050, 600);
             } else {
-                System.out.println("Invalid Account");
+                System.out.printf("\nInvalid Account");
             }
-
         }
     }
 

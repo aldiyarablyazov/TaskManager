@@ -39,9 +39,9 @@ public class DatabaseController implements Initializable {
             ResultSetMetaData dbMetadata = dbResults.getMetaData();
             int columns = dbMetadata.getColumnCount();
 
-            for (int i = 1; i <= columns; i++)
-                System.out.print(dbMetadata.getColumnName(i) + " ");
-            System.out.println();
+            //for (int i = 1; i <= columns; i++)
+              //  System.out.print(dbMetadata.getColumnName(i) + " ");
+            //System.out.println();
 
             while (dbResults.next()) {
                 for (int i = 1; i <= columns; i++) {
@@ -50,19 +50,19 @@ public class DatabaseController implements Initializable {
                     switch (i) {
                         case 1:
 
-                            usernames.add(value);
+                            userIDs.add(value);
                             break;
                         case 2:
 
-                            passwords.add(value);
+                            usernames.add(value);
                             break;
                         case 3:
 
-                            professions.add(value);
+                            passwords.add(value);
                             break;
                         case 4:
 
-                            userIDs.add(value);
+                            professions.add(value);
                             break;
                     }
                 }
@@ -75,6 +75,18 @@ public class DatabaseController implements Initializable {
             System.out.println("SQL Error");
         }
 
+    }
+
+    public ArrayList getUsernames() {
+        return usernames;
+    }
+
+    public ArrayList getPasswords() {
+        return passwords;
+    }
+
+    public ArrayList getProfession() {
+        return professions;
     }
 
 
