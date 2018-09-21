@@ -36,7 +36,6 @@ public class Main extends Application {
             // Won't work on Windows or Linux.
         }
 
-
         launch(args);
     }
 }

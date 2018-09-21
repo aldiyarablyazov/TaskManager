@@ -1,24 +1,26 @@
 package taskmanager;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountController {
 
-    public boolean isValidAccount(String username, String password, int isTeacher) {
+    public boolean isValidAccount(String username, String password, int isTeacher) throws SQLException,IOException {
 
-        DatabaseController dataControl = new DatabaseController();
-        dataControl.handleConnect();
+        DatabaseController databaseController = new DatabaseController();
+        databaseController.handleConnect();
 
-        ArrayList usernames = dataControl.getUsernames();
-        ArrayList passwords = dataControl.getPasswords();
-        ArrayList isTeachers = dataControl.getProfession();
+        ArrayList usernames = databaseController.getUsernames();
+        ArrayList passwords = databaseController.getPasswords();
+        ArrayList isTeachers = databaseController.getProfession();
 
         int usernameMatchIndex = -1;
 
         for (int i = 0; i < (usernames.size()); i++) {
 
             if ( ((usernames.get(i)).equals(username)) && (passwords.get(i).equals(password)) && (isTeachers.get(i).equals(isTeacher)) ) {
-                usernameMatchIndex = i;
+                usernameMatchIndex = i;
             }
         }
 

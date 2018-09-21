@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package taskmanager;
 
 import javafx.fxml.FXML;
@@ -18,61 +19,46 @@ public class DatabaseController implements Initializable {
     private ArrayList usernames = new ArrayList();
     private ArrayList passwords = new ArrayList();
     private ArrayList professions = new ArrayList();
-    private ArrayList userIDs = new ArrayList();
 
+    String user = "alexa";
+    String password = "Alex2018";
+    String url = "jdbc:mysql://remote-mysql3.servage.net:3306/alexa";
+    String query = "SELECT * FROM alexa.Accounts ";
 
     @FXML
-    public void handleConnect() {
+    public void handleConnect() throws SQLException {
 
-        String user = "alexa";
-        String password = "Alex2018";
-        String url = "jdbc:mysql://remote-mysql3.servage.net:3306/alexa";
-        String query = "SELECT * FROM alexa.Accounts ";
+        System.out.println();
 
-        try {
+        Connection dbConn = DriverManager.getConnection(url, user, password);
+        Statement statement = dbConn.createStatement();
+        ResultSet dbResults = statement.executeQuery(query);
+        ResultSetMetaData dbMetadata = dbResults.getMetaData();
+        int columns = dbMetadata.getColumnCount();
 
-            System.out.println();
+        //for (int i = 1; i <= columns; i++)
+          //  System.out.print(dbMetadata.getColumnName(i) + " ");
+        //System.out.println();
 
-            Connection dbConn = DriverManager.getConnection(url, user, password);
-            Statement statement = dbConn.createStatement();
-            ResultSet dbResults = statement.executeQuery(query);
-            ResultSetMetaData dbMetadata = dbResults.getMetaData();
-            int columns = dbMetadata.getColumnCount();
+        while (dbResults.next()) {
+            for (int i = 1; i <= columns; i++) {
+                Object value = dbResults.getObject(i);
+                System.out.print(dbResults.getObject(i) + " ");
+                switch (i) {
+                    case 1:
+                        usernames.add(value);
+                        break;
+                    case 2:
+                        passwords.add(value);
+                        break;
 
-            //for (int i = 1; i <= columns; i++)
-              //  System.out.print(dbMetadata.getColumnName(i) + " ");
-            //System.out.println();
-
-            while (dbResults.next()) {
-                for (int i = 1; i <= columns; i++) {
-                    Object value = dbResults.getObject(i);
-                    System.out.print(dbResults.getObject(i) + " ");
-                    switch (i) {
-                        case 1:
-
-                            userIDs.add(value);
-                            break;
-                        case 2:
-
-                            usernames.add(value);
-                            break;
-                        case 3:
-
-                            passwords.add(value);
-                            break;
-                        case 4:
-
-                            professions.add(value);
-                            break;
-                    }
+                    case 3:
+                        professions.add(value);
+                        break;
                 }
-
-                System.out.println();
             }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("SQL Error");
+            System.out.println();
         }
 
     }
@@ -89,6 +75,18 @@ public class DatabaseController implements Initializable {
         return professions;
     }
 
+
+    @FXML
+    public void handleRegisterConnect(String username, String password, Integer isTeacher) throws SQLException {
+
+        Connection dbConn = DriverManager.getConnection(this.url, this.user, this.password);
+        Statement statement = dbConn.createStatement();
+        statement.execute("INSERT INTO alexa.Accounts SET "
+                + "username = '" + username + "', "
+                + "password = '" + password + "', "
+                + "isTeacher = " + isTeacher);
+        dbConn.close();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

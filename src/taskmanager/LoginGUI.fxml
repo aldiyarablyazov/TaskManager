@@ -62,7 +62,7 @@
                                  </toggleGroup>
                               </JFXRadioButton>
                               <JFXRadioButton fx:id="teacherRadio1" layoutX="203.0" layoutY="109.0" style="-jfx-selected-color: #3498db;" text="Teacher" textFill="WHITE" toggleGroup="$loginToggle" />
-                              <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="70.0" layoutY="270.0" onAction="#loginButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="LOGIN" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
+                              <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="70.0" layoutY="286.0" onAction="#loginButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="LOGIN" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
                                  <font>
                                     <Font name="Montserrat Medium" size="16.0" />
                                  </font>
@@ -72,6 +72,7 @@
                                     <Font name="Montserrat SemiBold" size="29.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="loginErrorLabel" layoutX="103.0" layoutY="253.0" prefHeight="17.0" prefWidth="162.0" text="login details are incorrect" textFill="#ff7a7a" visible="false" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" />
                            </children>
                         </AnchorPane>
                      </children>
