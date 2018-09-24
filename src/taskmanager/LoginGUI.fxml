@@ -88,7 +88,7 @@
                               <Image url="@../RegisterBackground.png" />
                            </image>
                         </ImageView>
-                        <AnchorPane layoutX="200.0" layoutY="71.0" prefHeight="265.0" prefWidth="300.0" style="-fx-background-color: #1F2022; -fx-background-radius: 5;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+                        <AnchorPane layoutX="200.0" layoutY="57.0" prefHeight="279.0" prefWidth="300.0" style="-fx-background-color: #1F2022; -fx-background-radius: 5;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
                            <children>
                               <AnchorPane layoutX="30.0" layoutY="55.0" prefHeight="114.0" prefWidth="262.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                                  <children>
@@ -112,7 +112,7 @@
                                     </JFXPasswordField>
                                  </children>
                               </AnchorPane>
-                              <JFXButton fx:id="registerButton" buttonType="RAISED" layoutX="100.0" layoutY="194.0" onAction="#registerButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="REGISTER" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                              <JFXButton fx:id="registerButton" buttonType="RAISED" layoutX="30.0" layoutY="206.0" onAction="#registerButtonPressed" prefHeight="32.0" prefWidth="123.0" ripplerFill="WHITE" style="-fx-background-color: #3498db;" text="REGISTER" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                                  <font>
                                     <Font name="Montserrat SemiBold" size="16.0" />
                                  </font>
@@ -123,14 +123,15 @@
                                  </toggleGroup>
                               </JFXRadioButton>
                               <JFXRadioButton fx:id="teacherRadio2" layoutX="169.0" layoutY="20.0" style="-jfx-selected-color: #3498db;" text="Teacher" textFill="WHITE" toggleGroup="$registerToggle" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="20.0" />
-                              <JFXButton layoutX="28.0" layoutY="234.0" mnemonicParsing="false" onAction="#goToLoginButtonPressed" prefHeight="15.0" prefWidth="241.0" ripplerFill="#1f2022" text="Already have an account?" textFill="#3498db" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                              <JFXButton layoutX="30.0" layoutY="246.0" mnemonicParsing="false" onAction="#goToLoginButtonPressed" prefHeight="15.0" prefWidth="241.0" ripplerFill="#1f2022" text="Already have an account?" textFill="#3498db" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                                  <font>
                                     <Font name="Montserrat ExtraLight" size="13.0" />
                                  </font>
                               </JFXButton>
+                              <Label fx:id="registerStatus" layoutX="57.0" layoutY="179.0" text="Account created successfully!" textFill="#bfff9d" visible="false" />
                            </children>
                         </AnchorPane>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="15.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="336.0" text="CREATE NEW ACCOUNT" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="15.0" minHeight="16" minWidth="69" prefHeight="27.0" prefWidth="336.0" text="CREATE NEW ACCOUNT" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Montserrat ExtraLight" size="18.0" />
                            </font>

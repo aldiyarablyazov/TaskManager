@@ -27,6 +27,7 @@ public class LoginController implements Initializable {
     @FXML private JFXButton loginButton;
     @FXML private Tab loginTab;
     @FXML private Label loginErrorLabel;
+    @FXML private Label registerStatus;
 
     @FXML
     private void loginButtonPressed(ActionEvent event) throws SQLException, IOException {
@@ -105,16 +106,22 @@ public class LoginController implements Initializable {
             repeatPasswordField.setStyle("-fx-prompt-text-fill: red");
 
         }  else {
-            usernameField.setStyle("-fx-text-inner-color: white");
-            passwordField.setStyle("-fx-text-inner-color: white");
-
-            System.out.println("\n");
-            System.out.println("IsTeacher: " + isTeacher);
-            System.out.println("Username: " + username1);
-            System.out.println("Password: " + password1);
-
             DatabaseController databaseController = new DatabaseController();
-            databaseController.handleRegisterConnect(username1, password1, isTeacher);
+            int result = databaseController.handleRegisterConnect(username1, password1, isTeacher);
+
+            if (result == 1) {
+                usernameField.setStyle("-fx-text-inner-color: white");
+                passwordField.setStyle("-fx-text-inner-color: white");
+
+                registerStatus.setText("Account creation successful");
+                registerStatus.setVisible(true);
+
+            } else {
+                registerStatus.setStyle("-fx-prompt-text-fill: red");
+                registerStatus.setText("This username already exists");
+                registerStatus.setVisible(true);
+            }
+
         }
     }
 

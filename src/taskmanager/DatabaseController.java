@@ -77,15 +77,32 @@ public class DatabaseController implements Initializable {
 
 
     @FXML
-    public void handleRegisterConnect(String username, String password, Integer isTeacher) throws SQLException {
+    public int handleRegisterConnect(String username, String password, Integer isTeacher) throws SQLException {
 
-        Connection dbConn = DriverManager.getConnection(this.url, this.user, this.password);
-        Statement statement = dbConn.createStatement();
-        statement.execute("INSERT INTO alexa.Accounts SET "
-                + "username = '" + username + "', "
-                + "password = '" + password + "', "
-                + "isTeacher = " + isTeacher);
-        dbConn.close();
+        handleConnect();
+        ArrayList usernameArray = getUsernames();
+        int flag = 0;
+        for (int i = 0; i < usernameArray.size();i++) {
+            System.out.println(usernameArray.get(i));
+            if (username.equals(usernameArray.get(i))) {
+                flag = 1;
+            }
+        }
+
+        if (flag == 0) {
+            Connection dbConn = DriverManager.getConnection(this.url, this.user, this.password);
+            Statement statement = dbConn.createStatement();
+
+            statement.execute("INSERT INTO alexa.Accounts SET "
+                    + "username = '" + username + "', "
+                    + "password = '" + password + "', "
+                    + "isTeacher = " + isTeacher);
+            dbConn.close();
+            return 1;
+        } else {
+            return 0;
+        }
+
     }
 
     @Override

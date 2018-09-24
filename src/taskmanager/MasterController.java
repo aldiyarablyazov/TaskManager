@@ -1,19 +1,19 @@
 package taskmanager;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MasterController implements Initializable {
 
-    @FXML private ListView list;
+    @FXML public JFXListView list;
     @FXML private JFXButton logOutButton;
 
     @FXML
@@ -21,9 +21,13 @@ public class MasterController implements Initializable {
         Utilities.changeScene(new MasterController(), logOutButton, "LoginGUI.fxml", 700, 400);
     }
 
+    public void addTask(String task) {
+        ObservableList<String> items = FXCollections.observableArrayList (task);
+        list.setItems(items);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> items = FXCollections.observableArrayList ("No tasks as of yet!");
-        list.setItems(items);
+        addTask("No tasks set");
     }
 }
