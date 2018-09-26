@@ -20,10 +20,10 @@ public class DatabaseController implements Initializable {
     private ArrayList passwords = new ArrayList();
     private ArrayList professions = new ArrayList();
 
-    String user = "alexa";
-    String password = "Alex2018";
-    String url = "jdbc:mysql://remote-mysql3.servage.net:3306/alexa";
-    String query = "SELECT * FROM alexa.Accounts ";
+    private String user = "alexa";
+    private String password = "Alex2018";
+    private String url = "jdbc:mysql://remote-mysql3.servage.net:3306/alexa";
+    private String query = "SELECT * FROM alexa.Accounts ";
 
     @FXML
     public void handleConnect() throws SQLException {
@@ -107,7 +107,6 @@ public class DatabaseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
 }
