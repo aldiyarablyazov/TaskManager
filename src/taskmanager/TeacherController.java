@@ -18,6 +18,7 @@ public class TeacherController implements Initializable {
     @FXML private JFXTextArea taskDescription;
     @FXML private JFXTextField taskTitle;
     @FXML private JFXDatePicker dueDate;
+    @FXML private JFXComboBox subjectSelect;
 
     DatabaseController databaseController = new DatabaseController();
 
@@ -50,6 +51,25 @@ public class TeacherController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        subjectSelect.getItems().addAll(
+                "Mathematics",
+                "Biology",
+                "Physics",
+                "Chemistry",
+                "Computer Science",
+                "English",
+                "Spanish",
+                "French",
+                "History",
+                "Geography",
+                "Economics",
+                "Business Management",
+                "ESS",
+                "Art",
+                "Music",
+                "Drama"
+        );
 
         try {
             getStudents();
