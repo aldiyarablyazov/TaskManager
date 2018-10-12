@@ -36,10 +36,6 @@ public class DatabaseController implements Initializable {
         ResultSetMetaData dbMetadata = dbResults.getMetaData();
         int columns = dbMetadata.getColumnCount();
 
-        //for (int i = 1; i <= columns; i++)
-          //  System.out.print(dbMetadata.getColumnName(i) + " ");
-        //System.out.println();
-
         while (dbResults.next()) {
             for (int i = 1; i <= columns; i++) {
                 Object value = dbResults.getObject(i);
@@ -61,6 +57,8 @@ public class DatabaseController implements Initializable {
             System.out.println();
         }
 
+        dbConn.close();
+
     }
 
     public ArrayList getUsernames() {
@@ -77,18 +75,19 @@ public class DatabaseController implements Initializable {
 
 
     @FXML
-    public int handleRegisterConnect(String username, String password, Integer isTeacher) throws SQLException {
+    public Boolean handleRegisterConnect(String username, String password, Integer isTeacher) throws SQLException {
 
         handleConnect();
         ArrayList usernameArray = getUsernames();
+        //checks if there is already the same username in the database
         int flag = 0;
         for (int i = 0; i < usernameArray.size();i++) {
-            System.out.println(usernameArray.get(i));
             if (username.equals(usernameArray.get(i))) {
                 flag = 1;
             }
         }
 
+        //if there is no duplicate username, adds into database and returns username
         if (flag == 0) {
             Connection dbConn = DriverManager.getConnection(this.url, this.user, this.password);
             Statement statement = dbConn.createStatement();
@@ -98,11 +97,15 @@ public class DatabaseController implements Initializable {
                     + "password = '" + password + "', "
                     + "isTeacher = " + isTeacher);
             dbConn.close();
-            return 1;
+            return true;
         } else {
-            return 0;
+            return false;
         }
+    }
 
+
+    public Boolean handleSetTask() {
+        return true;
     }
 
     @Override

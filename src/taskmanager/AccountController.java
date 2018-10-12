@@ -17,8 +17,8 @@ public class AccountController {
 
         int usernameMatchIndex = -1;
 
+        //checks if all the fields entered are the same as something in the database
         for (int i = 0; i < (usernames.size()); i++) {
-
             if ( ((usernames.get(i)).equals(username)) && (passwords.get(i).equals(password)) && (isTeachers.get(i).equals(isTeacher)) ) {
                 usernameMatchIndex = i;
             }

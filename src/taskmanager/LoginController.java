@@ -58,11 +58,6 @@ public class LoginController implements Initializable {
             usernameField.setStyle("-fx-text-inner-color: white");
             passwordField.setStyle("-fx-text-inner-color: white");
 
-            System.out.println("Position: " + isTeacher);
-            System.out.println("Username: " + username);
-            System.out.println("Password: " + password);
-
-
             AccountController accountController = new AccountController();
             if (accountController.isValidAccount(usernameField.getText(), passwordField.getText(), isTeacher)) {
                 if (isTeacher==0) {
@@ -92,31 +87,38 @@ public class LoginController implements Initializable {
         }
 
         if (isTeacher == -1) {
-            System.out.println("You must enter a profession");
-        } else if ("".equals(username1)) {
-            System.out.println("You must enter a username");
+            registerStatus.setText("You must enter a profession");
             usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setVisible(true);
+
+        } else if ("".equals(username1)) {
+            usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setText("You must enter a username");
+            usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setVisible(true);
 
         } else if ("".equals(password1)) {
-            System.out.println("You must enter a password");
-            passwordField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setText("You must enter a password");
+            usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setVisible(true);
 
         } else if ("".equals(repeatPass)) {
-            System.out.println("You must repeat your password");
-            repeatPasswordField.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setText("You must repeat your password");
+            usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setVisible(true);
 
         } else if (!password1.equals(repeatPass)) {
-            System.out.println("Passwords do not match");
-            repeatPasswordField.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setText("Passwords do not match");
+            usernameField1.setStyle("-fx-prompt-text-fill: red");
+            registerStatus.setVisible(true);
 
         }  else {
+            // Checks if there isn't a duplicate, it adds to database and returns false, otherwise returns true
             DatabaseController databaseController = new DatabaseController();
-            int result = databaseController.handleRegisterConnect(username1, password1, isTeacher);
+            Boolean duplicateUsername = databaseController.handleRegisterConnect(username1, password1, isTeacher);
 
-            if (result == 1) {
+            if (duplicateUsername == false) {
                 usernameField.setStyle("-fx-text-inner-color: white");
-                passwordField.setStyle("-fx-text-inner-color: white");
-
                 registerStatus.setText("Account creation successful");
                 registerStatus.setVisible(true);
 

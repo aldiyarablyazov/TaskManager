@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class MasterController implements Initializable {
 
-    @FXML public JFXListView list;
+    @FXML private JFXListView list;
     @FXML private JFXButton logOutButton;
 
     @FXML
@@ -36,7 +36,6 @@ public class MasterController implements Initializable {
 //TODO Implement delete task function
 //TODO Implement delete user function
 //TODO When each user logs on he sees his own tasks loaded from initialize function
-//TODO Implement different screens for teachers and students
 //TODO Implement relative file paths so the application works everywhere
 //TODO Teachers pick students from database to set their tasks to
 //TODO Teachers can see which students have done what tasks
