@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -118,12 +119,12 @@ public class LoginController implements Initializable {
             Boolean duplicateUsername = databaseController.handleRegisterConnect(username1, password1, isTeacher);
 
             if (duplicateUsername == false) {
-                usernameField.setStyle("-fx-text-inner-color: white");
+                registerStatus.setTextFill(Color.web("#BFFF9D"));
                 registerStatus.setText("Account creation successful");
                 registerStatus.setVisible(true);
 
             } else {
-                registerStatus.setStyle("-fx-prompt-text-fill: red");
+                registerStatus.setTextFill(Color.web("#E74C3C"));
                 registerStatus.setText("This username already exists");
                 registerStatus.setVisible(true);
             }

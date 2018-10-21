@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Label?>
@@ -30,13 +29,14 @@
                         <JFXButton fx:id="logOutButton" layoutX="626.0" layoutY="6.0" onAction="#logOut" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #3598DC;" text="Log Out" textFill="WHITE" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="5.0" />
                         <JFXListView fx:id="list" fixedCellSize="0.0" style="-fx-background-color: #1F2022; fx-text-inner-color: white; -fx-background-radius: 5;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
                         <JFXButton layoutX="871.0" layoutY="6.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #3598DC;" text="Quit" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="5.0" />
-                        <TableView layoutX="224.0" layoutY="173.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                        <TableView fx:id="tasksTableView" layoutX="224.0" layoutY="173.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="taskColumn" prefWidth="547.9999847412109" text="Task" />
+                            <TableColumn fx:id="subjectColumn" minWidth="0.0" prefWidth="226.0" text="Subject" />
+                              <TableColumn fx:id="dueDateColumn" prefWidth="173.0" text="Due Date" />
+                              <TableColumn fx:id="completedColumn" prefWidth="82.0" text="Completed" />
                           </columns>
                         </TableView>
-                        <JFXDrawer prefHeight="150.0" prefWidth="200.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

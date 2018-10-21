@@ -19,7 +19,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("LoginGUI.fxml"));
         Scene loginScene = new Scene(root);
 
-        loginScene.getStylesheets().add("CustomStyle.css");
+        loginScene.getStylesheets().add("TabPaneStyle.css");
         primaryStage.setTitle("Task Manager");
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);

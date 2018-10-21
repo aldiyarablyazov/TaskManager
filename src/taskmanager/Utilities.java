@@ -20,7 +20,7 @@ public class Utilities {
             Parent newScene = FXMLLoader.load(controller.getClass().getResource(file));
             Scene scene = button.getScene();
             scene.setRoot(newScene);
-            newScene.getStylesheets().add("CustomStyle.css");
+            newScene.getStylesheets().add("TabPaneStyle.css");
 
             // center stage on screen
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -47,7 +47,7 @@ public class Utilities {
             Parent newScene = FXMLLoader.load(controller.getClass().getResource(file));
             Scene scene = button.getScene();
             scene.setRoot(newScene);
-            newScene.getStylesheets().add("CustomStyle.css");
+            newScene.getStylesheets().add("TabPaneStyle.css");
 
             // center stage on screen
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();

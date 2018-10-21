@@ -97,9 +97,9 @@ public class DatabaseController implements Initializable {
                     + "password = '" + password + "', "
                     + "isTeacher = " + isTeacher);
             dbConn.close();
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
