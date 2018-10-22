@@ -24,7 +24,7 @@ public class MasterController implements Initializable {
     @FXML private TableColumn<TableList, String> taskColumn;
     @FXML private TableColumn<TableList, String> subjectColumn;
     @FXML private TableColumn<TableList, LocalDate> dueDateColumn;
-    @FXML private TableColumn<TableList, Boolean> completedColumn;
+    @FXML private TableColumn<TableList, String> completedColumn;
 
     @FXML
     private void logOut(ActionEvent event) {
@@ -44,14 +44,16 @@ public class MasterController implements Initializable {
         taskColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Task"));
         subjectColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Subject"));
         dueDateColumn.setCellValueFactory(new PropertyValueFactory<TableList,LocalDate>("DueDate"));
-        completedColumn.setCellValueFactory(new PropertyValueFactory<TableList,Boolean>("Completed"));
+        completedColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Completed"));
 
         tasksTableView.setItems(getTasks());
     }
 
     public ObservableList<TableList> getTasks() {
         ObservableList<TableList> data = FXCollections.observableArrayList();
-        data.add(new TableList("Field1", "Field2",LocalDate.of(1915, Month.DECEMBER, 1), false));
+        data.add(new TableList("Finish your math IA", "Mathematics HL",LocalDate.of(2018, Month.NOVEMBER, 6)));
+        data.add(new TableList("Give in your university applications Give in your university applications Give in your university applications Give in your university applications Give in your university applications ", "Computer Science",LocalDate.of(2018, Month.JANUARY, 1)));
+        data.add(new TableList("Complete your Computer Science IA", "Computer Science",LocalDate.of(2018, Month.DECEMBER, 1)));
         return data;
     }
 }

@@ -5,10 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
@@ -19,6 +20,11 @@ public class TeacherController implements Initializable {
     @FXML private JFXTextField taskTitle;
     @FXML private JFXDatePicker dueDate;
     @FXML private JFXComboBox subjectSelect;
+    @FXML private TableColumn selectColumn;
+    @FXML private TableColumn studentsColumn;
+    @FXML private TableView studentTableView;
+
+    /*
 
     DatabaseController databaseController = new DatabaseController();
 
@@ -29,28 +35,43 @@ public class TeacherController implements Initializable {
     public void getStudents() throws SQLException { // adds all students in DB to studentArray
         databaseController.handleConnect();
 
-
-
         for (int i = 0; i < (usernames.size()); i++) {
             if (isTeachers.get(i).equals(0)) {
                 studentArray.add(usernames.get(i));
             }
         }
 
-        System.out.println(isTeachers);
-        System.out.println(usernames);
-        System.out.println(studentArray);
-
-
     }
 
+    */
+
+    /*
     public void addStudents() {
         ObservableList<String> items = FXCollections.observableArrayList (studentArray);
         studentNamesListView.setItems(items);
     }
+    */
+
+    public void initColumns() {
+        selectColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView,JFXCheckBox>("Select"));
+        studentsColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView,String>("Student"));
+    }
+
+    ObservableList<StudentTableView> getNewStudents() {
+        ObservableList<StudentTableView> students = FXCollections.observableArrayList();
+        students.add(new StudentTableView("Test"));
+        return students;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        /* TABLE VIEW BELOW */
+            initColumns();
+            studentTableView.setItems(getNewStudents());
+
+
+        /*
 
         subjectSelect.getItems().addAll(
                 "Mathematics",
@@ -87,8 +108,7 @@ public class TeacherController implements Initializable {
             strings.add("Item " + i);
         }
 
-        // Create the CheckListView with the data
-        //final CheckListView<String> checkListView = new CheckListView<>(strings);
+        */
 
     }
 }

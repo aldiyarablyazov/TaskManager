@@ -1,12 +1,11 @@
 package taskmanager;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountController {
 
-    public boolean isValidAccount(String username, String password, int isTeacher) throws SQLException,IOException {
+    public boolean isValidAccount(String username, String password, int isTeacher) throws SQLException {
 
         DatabaseController databaseController = new DatabaseController();
         databaseController.handleConnect();
@@ -24,11 +23,7 @@ public class AccountController {
             }
         }
 
-        if (usernameMatchIndex != (-1)) {
-            return true;
-        } else {
-            return false;
-        }
+        return usernameMatchIndex != (-1);
 
     }
 }

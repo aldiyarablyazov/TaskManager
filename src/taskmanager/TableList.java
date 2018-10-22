@@ -1,21 +1,20 @@
 package taskmanager;
 
-import javafx.beans.property.SimpleBooleanProperty;
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
-
 import java.time.LocalDate;
 
 public class TableList {
 
     private SimpleStringProperty task, subject;
-    private SimpleBooleanProperty completed;
     private LocalDate dueDate;
+    private JFXButton completed;
 
-    public TableList(String task, String subject, LocalDate dueDate, Boolean completed) {
+    public TableList(String task, String subject, LocalDate dueDate) {
         this.task = new SimpleStringProperty(task);
         this.subject = new SimpleStringProperty(subject);
         this.dueDate = dueDate;
-        this.completed = new SimpleBooleanProperty(completed);
+        this.completed = new JFXButton("Finished");
     }
 
     public String getTask() {
@@ -30,8 +29,8 @@ public class TableList {
         return dueDate;
     }
 
-    public Boolean getCompleted() {
-        return completed.get();
+    public JFXButton getCompleted() {
+        return completed;
     }
 
 }

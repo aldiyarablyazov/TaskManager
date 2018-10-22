@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void registerButtonPressed(ActionEvent event) throws SQLException,IOException {
+    private void registerButtonPressed(ActionEvent event) throws SQLException {
         // Text Field Error Handling
         String username1 = usernameField1.getText();
         String password1 = passwordField1.getText();

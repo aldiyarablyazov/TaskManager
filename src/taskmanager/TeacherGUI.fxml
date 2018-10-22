@@ -36,11 +36,14 @@
                            </font>
                         </JFXButton>
                         <JFXComboBox fx:id="subjectSelect" focusColor="#3498db" layoutX="672.0" layoutY="27.0" promptText="Subject" stylesheets="@../ComboBoxStyle.css" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="20.0" />
-                        <TableView layoutX="241.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="180.0">
+                        <TableView fx:id="studentTableView" layoutX="241.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../TableViewStyle.css" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="180.0">
                           <columns>
-                            <TableColumn prefWidth="86.0" text="Choose" />
-                            <TableColumn prefWidth="923.0" text="Student" />
+                            <TableColumn fx:id="selectColumn" prefWidth="100.0" text="Select" />
+                            <TableColumn fx:id="studentsColumn" prefWidth="909.0" text="Student" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children></AnchorPane>
               </content>
