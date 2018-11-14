@@ -59,7 +59,7 @@ public class LoginController implements Initializable {
 
             AccountController accountController = new AccountController();
             if (accountController.isValidAccount(usernameField.getText(), passwordField.getText(), isTeacher)) {
-            setCurrentUser(username);
+                setCurrentUser(username);
                 if (isTeacher==0) {
                     Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1050, 600);
                 } else {
