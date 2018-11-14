@@ -1,6 +1,9 @@
 package taskmanager;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,70 +11,118 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class TeacherController implements Initializable {
 
-    @FXML private JFXListView studentNamesListView;
-    @FXML private JFXButton setTaskButton;
     @FXML private JFXTextArea taskDescription;
     @FXML private JFXTextField taskTitle;
     @FXML private JFXDatePicker dueDate;
     @FXML private JFXComboBox subjectSelect;
-    @FXML private TableColumn selectColumn;
-    @FXML private TableColumn studentsColumn;
     @FXML private TableView studentTableView;
+    @FXML private TableColumn<StudentTableView, String> selectColumn;
+    @FXML private TableColumn<StudentTableView, String> studentColumn;
 
-    /*
+    @FXML public void quit() {
+        System.exit(0);
+    }
+
+    @FXML public void logOut() {
+        Utilities.changeScene(new MasterController(), studentTableView, "LoginGUI.fxml", 700, 400);
+    }
 
     DatabaseController databaseController = new DatabaseController();
-
-    ArrayList<String> studentArray = new ArrayList();
     ArrayList<String> usernames = databaseController.getUsernames();
     ArrayList isTeachers = databaseController.getProfession();
+    final ObservableList<StudentTableView> students = FXCollections.observableArrayList();
 
-    public void getStudents() throws SQLException { // adds all students in DB to studentArray
+    public ObservableList<StudentTableView> getStudents() throws SQLException {
         databaseController.handleConnect();
-
         for (int i = 0; i < (usernames.size()); i++) {
             if (isTeachers.get(i).equals(0)) {
-                studentArray.add(usernames.get(i));
+                students.add(new StudentTableView(usernames.get(i)));
             }
         }
-
-    }
-
-    */
-
-    /*
-    public void addStudents() {
-        ObservableList<String> items = FXCollections.observableArrayList (studentArray);
-        studentNamesListView.setItems(items);
-    }
-    */
-
-    public void initColumns() {
-        selectColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView,JFXCheckBox>("Select"));
-        studentsColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView,String>("Student"));
-    }
-
-    ObservableList<StudentTableView> getNewStudents() {
-        ObservableList<StudentTableView> students = FXCollections.observableArrayList();
-        students.add(new StudentTableView("Test"));
         return students;
     }
 
+    @FXML public void setTaskPressed() throws SQLException {
+
+        ArrayList setTaskForStudents = new ArrayList();
+
+        for (StudentTableView student: students) {
+            if(student.getSelect().isSelected()) {
+                setTaskForStudents.add(student.getStudentName());
+            }
+        }
+
+        String description = taskDescription.getText();
+        String title = taskTitle.getText();
+        String subject = (String) subjectSelect.getValue();
+
+
+        if ("".equals(description)) {
+            taskDescription.setUnFocusColor(Color.RED);
+        } else if ("".equals(title)) {
+            taskTitle.setUnFocusColor(Color.RED);
+        } else if (subject == null) {
+            subjectSelect.setUnFocusColor(Color.RED);
+        } else if (dueDate.getValue() == null) {
+            dueDate.setDefaultColor(Color.RED);
+        } else {
+            DatabaseController databaseController = new DatabaseController();
+            databaseController.handleConnect();
+
+            taskDescription.setUnFocusColor(Color.web("#4d4d4d"));
+            taskTitle.setUnFocusColor(Color.web("#4d4d4d"));
+            subjectSelect.setUnFocusColor(Color.web("#4d4d4d"));
+            dueDate.setDefaultColor(Color.web("#4d4d4d"));
+
+            for (int i = 0; i < setTaskForStudents.size(); i++) {
+                Connection dbConn = DriverManager.getConnection("jdbc:mysql://remote-mysql3.servage.net:3306/alexa", "alexa", "Alex2018");
+                Statement statement = dbConn.createStatement();
+                LoginController loginController = new LoginController();
+
+                statement.execute("INSERT INTO alexa.Tasks SET "
+                        + "studentID = '" + setTaskForStudents.get(i) + "', "
+                        + "taskTitle = '" + title + "', "
+                        + "subject = '" + subject + "', "
+                        + "description = '" + description + "', "
+                        + "teacher = '" + getCurrentUser() + "', "
+                        + "dueDate = '" + dueDate.getValue() + "', "
+                        + "isCompleted = " + 0);
+                dbConn.close();
+
+            }
+        }
+    }
+
+
+    public static String getCurrentUser() {
+        return CurrentUser.getCurrentUser();
+    }
+
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        public void initialize(URL location, ResourceBundle resources) {
 
         /* TABLE VIEW BELOW */
-            initColumns();
-            studentTableView.setItems(getNewStudents());
+        selectColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView, String>("Select"));
+        studentColumn.setCellValueFactory(new PropertyValueFactory<StudentTableView, String>("StudentName"));
 
-
-        /*
+        try {
+            studentTableView.setItems(getStudents());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         subjectSelect.getItems().addAll(
                 "Mathematics",
@@ -92,23 +143,8 @@ public class TeacherController implements Initializable {
                 "Drama"
         );
 
-        try {
-            getStudents();
-            for (int i = 0; i < (studentArray.size()); i++) {
-                addStudents();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-
-        final ObservableList<String> strings = FXCollections.observableArrayList();
-        for (int i = 0; i <= 100; i++) {
-            strings.add("Item " + i);
-        }
-
-        */
-
     }
+
+
+
 }

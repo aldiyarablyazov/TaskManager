@@ -97,3 +97,8 @@
     -fx-background-color: #3498db;
     -fx-text-fill: white;
 }
+
+.table-row-cell .jfx-check-box {
+    -jfx-checked-color: #3498db;
+    -jfx-unchecked-color: #3498db;
+}

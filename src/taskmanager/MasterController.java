@@ -1,7 +1,6 @@
 package taskmanager;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import java.util.ResourceBundle;
 
 public class MasterController implements Initializable {
 
-    @FXML private JFXListView list;
     @FXML private JFXButton logOutButton;
     @FXML private TableView tasksTableView;
     @FXML private TableColumn<TableList, String> taskColumn;
@@ -31,15 +29,12 @@ public class MasterController implements Initializable {
         Utilities.changeScene(new MasterController(), logOutButton, "LoginGUI.fxml", 700, 400);
     }
 
-    public void addTask(String task) {
-        ObservableList<String> items = FXCollections.observableArrayList (task);
-        list.setItems(items);
+    @FXML public void quit() {
+        System.exit(0);
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addTask("No tasks set");
 
         taskColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Task"));
         subjectColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Subject"));

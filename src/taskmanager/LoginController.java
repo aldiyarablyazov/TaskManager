@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -31,8 +30,7 @@ public class LoginController implements Initializable {
     @FXML private Label registerStatus;
 
     @FXML
-    private void loginButtonPressed(ActionEvent event) throws SQLException, IOException {
-        System.out.println("\n");
+    private void loginButtonPressed(ActionEvent event) throws SQLException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -61,6 +59,7 @@ public class LoginController implements Initializable {
 
             AccountController accountController = new AccountController();
             if (accountController.isValidAccount(usernameField.getText(), passwordField.getText(), isTeacher)) {
+            setCurrentUser(username);
                 if (isTeacher==0) {
                     Utilities.changeScene(new MasterController(), loginButton, "MasterGUI.fxml", 1050, 600);
                 } else {
@@ -71,7 +70,13 @@ public class LoginController implements Initializable {
                 loginErrorLabel.setVisible(true);
             }
         }
+
     }
+
+    public static void setCurrentUser(String currentUser) {
+        CurrentUser.setCurrentUser(currentUser);
+    }
+
 
     @FXML
     private void registerButtonPressed(ActionEvent event) throws SQLException {

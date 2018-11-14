@@ -27,9 +27,6 @@ public class DatabaseController implements Initializable {
 
     @FXML
     public void handleConnect() throws SQLException {
-
-        System.out.println();
-
         Connection dbConn = DriverManager.getConnection(url, user, password);
         Statement statement = dbConn.createStatement();
         ResultSet dbResults = statement.executeQuery(query);
@@ -39,7 +36,6 @@ public class DatabaseController implements Initializable {
         while (dbResults.next()) {
             for (int i = 1; i <= columns; i++) {
                 Object value = dbResults.getObject(i);
-                System.out.print(dbResults.getObject(i) + " ");
                 switch (i) {
                     case 1:
                         usernames.add(value);
@@ -53,8 +49,6 @@ public class DatabaseController implements Initializable {
                         break;
                 }
             }
-
-            System.out.println();
         }
 
         dbConn.close();
