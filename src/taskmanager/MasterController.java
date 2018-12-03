@@ -1,14 +1,20 @@
 package taskmanager;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -24,18 +30,16 @@ public class MasterController implements Initializable {
     @FXML private TableColumn<TableList, String> subjectColumn;
     @FXML private TableColumn<TableList, LocalDate> dueDateColumn;
     @FXML private TableColumn<TableList, String> completedColumn;
+    @FXML private StackPane dialogStackPane;
 
     TaskController taskController = new TaskController();
-    ArrayList currentUserTasks = new ArrayList<>();
 
     ArrayList taskIDs = taskController.getTaskIDs();
     ArrayList studentIDs = taskController.getStudentIDs();
     ArrayList taskTitles = taskController.getTaskTitles();
-    ArrayList subjects = taskController.getSubjects();
     ArrayList descriptions = taskController.getDescriptions();
-    ArrayList teachers = taskController.getTeachers();
+    ArrayList subjects = taskController.getSubjects();
     ArrayList<java.sql.Date> dueDates = taskController.getDueDates();
-    ArrayList isCompleteds = taskController.getIsCompleteds();
 
 
     @FXML
@@ -47,6 +51,25 @@ public class MasterController implements Initializable {
         System.exit(0);
     }
 
+    public void loadDialog(String title, String description) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(title));
+        content.setBody(new Text(description));
+
+        JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+        JFXButton doneButton = new JFXButton("Done");
+        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        content.setActions(doneButton);
+
+        dialog.show();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -55,19 +78,42 @@ public class MasterController implements Initializable {
         dueDateColumn.setCellValueFactory(new PropertyValueFactory<TableList,LocalDate>("DueDate"));
         completedColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Completed"));
 
+        dialogStackPane.setPickOnBounds(false);
+        ArrayList currentDesc = new ArrayList();
+
+
+        // Listens for double click on row
+        tasksTableView.setRowFactory( tv -> {
+            currentDesc.clear();
+            TableRow<TableList> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    TableList rowData = row.getItem();
+                    for (int i = 0; i < taskIDs.size(); i++) {
+                        if (taskTitles.get(i).equals(rowData.getTask())) {
+                            currentDesc.add((String) descriptions.get(i));
+                        }
+                    }
+                    loadDialog(rowData.getTask(), (String) currentDesc.get(currentDesc.size()-1));
+
+                }
+            });
+
+            return row ;
+        });
+
         tasksTableView.setItems(getTasks());
     }
 
     public ObservableList<TableList> getTasks() {
+
         ObservableList<TableList> data = FXCollections.observableArrayList();
 
         try {
 
             taskController.taskInit();
             for (int i = 0; i < taskIDs.size(); i++) {
-                System.out.println("\n");
                 if (studentIDs.get(i).equals(getCurrentUser())) {
-                    currentUserTasks.add(taskIDs.get(i));
                     data.add(new TableList((String) taskTitles.get(i), (String) subjects.get(i), dueDates.get(i).toLocalDate()));
                 }
             }
@@ -78,12 +124,15 @@ public class MasterController implements Initializable {
 
 
         return data;
-
     }
 
 
     public static String getCurrentUser() {
         return CurrentUser.getCurrentUser();
+    }
+
+    public TableView getTableView() {
+        return tasksTableView;
     }
 }
 

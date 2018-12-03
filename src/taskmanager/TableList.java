@@ -2,10 +2,14 @@ package taskmanager;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import java.time.LocalDate;
 
-public class TableList {
+public class TableList implements EventHandler<ActionEvent> {
 
+    MasterController masterController = new MasterController();
     private SimpleStringProperty task, subject;
     private LocalDate dueDate;
     private JFXButton completed;
@@ -15,6 +19,12 @@ public class TableList {
         this.subject = new SimpleStringProperty(subject);
         this.dueDate = dueDate;
         this.completed = new JFXButton("Finished");
+        completed.setOnAction(this);
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+
     }
 
     public String getTask() {
