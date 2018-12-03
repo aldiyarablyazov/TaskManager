@@ -28,18 +28,21 @@
                         </Label>
                         <JFXButton fx:id="logOutButton" layoutX="626.0" layoutY="6.0" onAction="#logOut" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: #3598DC;" text="Log Out" textFill="WHITE" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="5.0" />
                         <JFXButton layoutX="871.0" layoutY="6.0" mnemonicParsing="false" onAction="#quit" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #3598DC;" text="Quit" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="5.0" />
-                        <TableView fx:id="tasksTableView" layoutX="224.0" layoutY="173.0" stylesheets="@../TableViewStyle.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                        <TableView fx:id="tasksTableView" layoutX="224.0" layoutY="173.0" stylesheets="@../TableViewStyle.css" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                           <columns>
                             <TableColumn fx:id="taskColumn" prefWidth="547.9999847412109" text="Task" />
                             <TableColumn fx:id="subjectColumn" minWidth="0.0" prefWidth="226.0" text="Subject" />
                               <TableColumn fx:id="dueDateColumn" prefWidth="173.0" text="Due Date" />
-                              <TableColumn fx:id="completedColumn" prefWidth="82.0" text="Completed" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
                         <StackPane fx:id="dialogStackPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <JFXButton layoutX="983.0" layoutY="533.0" mnemonicParsing="false" onAction="#setAsCompleted" prefHeight="47.0" prefWidth="1030.0" style="-fx-background-color: #3598DC;" text="Set As Completed" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="19.0" />
+                           </font></JFXButton>
                      </children></AnchorPane>
               </content>
             </Tab>

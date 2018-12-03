@@ -9,15 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,18 +32,19 @@ public class MasterController implements Initializable {
     @FXML private TableColumn<TableList, String> taskColumn;
     @FXML private TableColumn<TableList, String> subjectColumn;
     @FXML private TableColumn<TableList, LocalDate> dueDateColumn;
-    @FXML private TableColumn<TableList, String> completedColumn;
     @FXML private StackPane dialogStackPane;
 
     TaskController taskController = new TaskController();
+    String currentSelection;
 
     ArrayList taskIDs = taskController.getTaskIDs();
     ArrayList studentIDs = taskController.getStudentIDs();
     ArrayList taskTitles = taskController.getTaskTitles();
     ArrayList descriptions = taskController.getDescriptions();
     ArrayList subjects = taskController.getSubjects();
+    ArrayList isCompleteds = taskController.getIsCompleteds();
     ArrayList<java.sql.Date> dueDates = taskController.getDueDates();
-
+    ArrayList currentDesc = new ArrayList();
 
     @FXML
     private void logOut(ActionEvent event) {
@@ -53,11 +57,9 @@ public class MasterController implements Initializable {
 
     public void loadDialog(String title, String description) {
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text(title));
-        content.setBody(new Text(description));
-
+        content.setHeading(new Label(title));
+        content.setBody(new Label(description));
         JFXDialog dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER);
-
         JFXButton doneButton = new JFXButton("Done");
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -76,18 +78,16 @@ public class MasterController implements Initializable {
         taskColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Task"));
         subjectColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Subject"));
         dueDateColumn.setCellValueFactory(new PropertyValueFactory<TableList,LocalDate>("DueDate"));
-        completedColumn.setCellValueFactory(new PropertyValueFactory<TableList,String>("Completed"));
 
         dialogStackPane.setPickOnBounds(false);
-        ArrayList currentDesc = new ArrayList();
-
 
         // Listens for double click on row
         tasksTableView.setRowFactory( tv -> {
-            currentDesc.clear();
+
             TableRow<TableList> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    currentDesc.clear();
                     TableList rowData = row.getItem();
                     for (int i = 0; i < taskIDs.size(); i++) {
                         if (taskTitles.get(i).equals(rowData.getTask())) {
@@ -95,7 +95,9 @@ public class MasterController implements Initializable {
                         }
                     }
                     loadDialog(rowData.getTask(), (String) currentDesc.get(currentDesc.size()-1));
-
+                } else if (event.getClickCount() == 1 && (! row.isEmpty())) {
+                    TableList rowData = row.getItem();
+                    currentSelection = rowData.getTask();
                 }
             });
 
@@ -113,7 +115,7 @@ public class MasterController implements Initializable {
 
             taskController.taskInit();
             for (int i = 0; i < taskIDs.size(); i++) {
-                if (studentIDs.get(i).equals(getCurrentUser())) {
+                if (studentIDs.get(i).equals(getCurrentUser()) && isCompleteds.get(i).equals(0)) {
                     data.add(new TableList((String) taskTitles.get(i), (String) subjects.get(i), dueDates.get(i).toLocalDate()));
                 }
             }
@@ -122,21 +124,31 @@ public class MasterController implements Initializable {
             e.printStackTrace();
         }
 
-
         return data;
     }
 
+    @FXML
+    public void setAsCompleted() {
+        tasksTableView.getItems().removeAll(tasksTableView.getSelectionModel().getSelectedItems());
+
+        try {
+
+            Object dueTask = tasksTableView.getSelectionModel().getSelectedItem();
+            System.out.println(dueTask);
+
+            Connection dbConn = DriverManager.getConnection("jdbc:mysql://remote-mysql3.servage.net:3306/alexa", "alexa", "Alex2018");
+            Statement statement = dbConn.createStatement();
+
+            statement.execute("UPDATE alexa.Tasks SET IsCompleted = 1 WHERE StudentID = '" + getCurrentUser() + "' AND TaskTitle = '" + currentSelection + "'");
+
+            dbConn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getCurrentUser() {
         return CurrentUser.getCurrentUser();
     }
 
-    public TableView getTableView() {
-        return tasksTableView;
-    }
 }
-
-//TODO Implement delete task function
-//TODO Implement relative file paths so the application works everywhere
-//TODO Teachers can see which students have done what tasks
-//TODO Calendar screen for students
