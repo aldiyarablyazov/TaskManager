@@ -91,7 +91,7 @@ public class MasterController implements Initializable {
                     TableList rowData = row.getItem();
                     for (int i = 0; i < taskIDs.size(); i++) {
                         if (taskTitles.get(i).equals(rowData.getTask())) {
-                            currentDesc.add((String) descriptions.get(i));
+                            currentDesc.add(descriptions.get(i));
                         }
                     }
                     loadDialog(rowData.getTask(), (String) currentDesc.get(currentDesc.size()-1));

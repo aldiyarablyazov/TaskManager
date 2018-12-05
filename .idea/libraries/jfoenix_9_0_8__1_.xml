@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jfoenix-8.0.4">
+  <library name="jfoenix-9.0.8 (1)">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/jfoenix-8.0.4.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jfoenix-9.0.8 (1).jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

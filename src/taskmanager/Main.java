@@ -17,13 +17,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("LoginGUI.fxml"));
-        Scene loginScene = new Scene(root);
+        Scene loginScene = new Scene(root,700,400);
 
         loginScene.getStylesheets().add("TabPaneStyle.css");
         primaryStage.setTitle("Task Manager");
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
@@ -34,6 +35,7 @@ public class Main extends Application {
             com.apple.eawt.Application.getApplication().setDockIconImage(image);
         } catch (Exception e) {
             // Won't work on Windows or Linux.
+
         }
 
         launch(args);
